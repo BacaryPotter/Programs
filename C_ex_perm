@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]	#Checks if there's only one param provided
+then
+	echo "Incorrect number of arguments."
+	echo "Usage: $0 \" bin name \" "
+	exit 1
+fi
+
+echo "What's the name of the output C file ? "
+read outputName
+
+chmod +x $1 		#add execution permission to the bin file
+
+gcc -o "$outputName" $1
+if [ "$?" -eq 0 ]
+then 
+	echo "compiled successfully"
+	echo "Would you like to execute it ? (yes/no)"
+	read answer
+	if [ "$answer" = "yes" ]
+		then 
+			./"$outputName"
+	else 
+		echo "No problem"
+		exit 0
+	fi
+fi
